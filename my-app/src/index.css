@@ -13,5 +13,7 @@ code {
 }
 
 #canvascontainer{
-  height: 500px;
+  display: inherit;
+  background-color: black;
+  height: 770px;
 }
