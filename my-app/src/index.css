@@ -1,5 +1,5 @@
 #appContainer{
-  height: 100vh;
+  height: 92vh;
 }
 
 #canvas{
@@ -10,6 +10,7 @@
 
 #header{
   position:relative;
+  height: 5vh;
   top:0;
   right:0;
   left:0;
@@ -18,6 +19,7 @@
 
 #footer{
   position:relative;
+  height: 3vh;
   left:0;
   bottom:0;
   right:0;

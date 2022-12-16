@@ -1,9 +1,8 @@
 import React, {Component } from 'react';
-import { Canvas} from '@react-three/fiber';
+import {Canvas} from '@react-three/fiber';
 import {OrbitControls, Stars} from '@react-three/drei';
 import './index.css';
 import Table from './components/table';
-import Layout from './components/layouts/Layout';
 // import Grid from './components/Grid';
 
 class App extends Component {
