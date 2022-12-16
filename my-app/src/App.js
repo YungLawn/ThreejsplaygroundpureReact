@@ -3,6 +3,7 @@ import { Canvas} from '@react-three/fiber';
 import {OrbitControls, Stars} from '@react-three/drei';
 import './index.css';
 import Table from './components/table';
+import Layout from './components/layouts/Layout';
 // import Grid from './components/Grid';
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
     render() { 
         return <div id='appContainer'>
             <Canvas id='canvas' camera={{ position: [0, 0, -10], fov: 45 }}>
+                
             {/* <Grid size={10} /> */}
                 <OrbitControls 
                     minPolarAngle={Math.PI / 2} 
@@ -26,6 +28,7 @@ class App extends Component {
                 <pointLight position={[10, 10, 10]}/>
                 <Table/>
                 <Stars/>
+                
             </Canvas>
         </div>;
     }
