@@ -5,9 +5,9 @@ class Layout extends React.Component {
   render(){
     return (
       <>
-        <Header />
+        <Header id='header' />
         <main>{this.props.children}</main>
-        <Footer />
+        <Footer id='footer' />
       </>
     )
   }

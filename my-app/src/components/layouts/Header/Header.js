@@ -1,11 +1,14 @@
 import React from "react";
+
+import '../../../index.css';
+
 class Header extends React.Component {
     // https://chrisdevcode.hashnode.dev/how-to-create-a-layout-component-react
   render() {
     return(
       <header id='header'>
-        <nav className='navbar navbar-expand-lg bg-light'>
-        <div className='container-fluid'>
+        <nav>
+        <div>
           <a className='navbar-brand' href='/'>
             Isotope Discovery App
           </a>
