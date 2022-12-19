@@ -1,9 +1,15 @@
 import React, {Component } from "react";
 import { Box} from "@react-three/drei";
 
-const PeridoicTable = () => (
+const Tile = () => (
     <Box args={[1, 1, 0.2]} position={[0,0,0]}>
-    <meshStandardMaterial attach="material" color="hotpink" />
+    <meshLambertMaterial attach="material" color="green" />
+    </Box>
+);
+
+const PerTable = () => (
+    <Box args={[1, 1, 0.2]} position={[0,0,0]}>
+        <meshLambertMaterial attach="material" color="green" />
     </Box>
 );
 
@@ -11,16 +17,10 @@ class Table extends Component {
     elements = {  
         Hydrogen: ['H', 'Hydrogen', '1.00794', 1, 1, 1, 10],
         Helium: ['He', 'Helium', '4.002602', 18, 1, 18, 10]
-    } 
-
-    PeridoicTable = () => (
-        <Box args={[1, 1, 0.2]} position={[0,0,0]}>
-        <meshStandardMaterial attach="material" color="beige" />
-        </Box>
-    );
-
+    }
+    
     render() { 
-        return (<PeridoicTable/>);
+        return (<Tile/>);
     }
 }
 
