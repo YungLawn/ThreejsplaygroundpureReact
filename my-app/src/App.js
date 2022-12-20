@@ -10,7 +10,7 @@ class App extends Component {
     state = {  } 
     render() { 
         return <div id='appContainer'>
-            <Canvas id='canvas' camera={{ position: [0, 0, -20], fov: 45 }}>
+            <Canvas id='canvas' camera={{ position: [0, 0, -30], fov: 25 }}>
                 <OrbitControls 
                     minPolarAngle={Math.PI / 2} 
                     maxPolarAngle={Math.PI / 1.65}
