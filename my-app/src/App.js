@@ -1,17 +1,16 @@
 import React, {Component } from 'react';
 import {Canvas} from '@react-three/fiber';
-import {OrbitControls, Stars} from '@react-three/drei';
+import {OrbitControls, Stars, Stats} from '@react-three/drei';
 import './index.css';
 import Table from './components/table';
+// import { Group } from 'three';
 // import Grid from './components/Grid';
 
 class App extends Component {
     state = {  } 
     render() { 
         return <div id='appContainer'>
-            <Canvas id='canvas' camera={{ position: [0, 0, -10], fov: 45 }}>
-                
-            {/* <Grid size={10} /> */}
+            <Canvas id='canvas' camera={{ position: [0, 0, -20], fov: 45 }}>
                 <OrbitControls 
                     minPolarAngle={Math.PI / 2} 
                     maxPolarAngle={Math.PI / 1.65}
@@ -25,9 +24,13 @@ class App extends Component {
                 />
                 <ambientLight intensity={0.5}/>
                 <pointLight position={[10, 10, 10]}/>
-                <Table/>
-                <Stars/>
+                <group position={[-10,-5,0]}>
+                    <Table/>
+                </group>
                 
+                <Stars/>
+                <Stats/>
+                {/* <Grid size={10} /> */}
             </Canvas>
         </div>;
     }
