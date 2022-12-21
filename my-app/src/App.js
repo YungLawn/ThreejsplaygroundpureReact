@@ -13,7 +13,7 @@ class App extends Component {
         return <div id='appContainer'>
             <Canvas id='canvas' camera={{fov: 10, position:[0,0,-80] }}>
                 <OrbitControls 
-                    minPolarAngle={Math.PI / 2} 
+                    minPolarAngle={Math.PI / 2}
                     maxPolarAngle={Math.PI / 1.2}
                     minAzimuthAngle = {0}
                     maxAzimuthAngle = {0}
