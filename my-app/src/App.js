@@ -1,34 +1,37 @@
 import React, {Component } from 'react';
 import {Canvas} from '@react-three/fiber';
-import {OrbitControls, Stars, Stats} from '@react-three/drei';
+import {OrbitControls, Stats} from '@react-three/drei';
 import './index.css';
 import Table from './components/table';
-// import { Group } from 'three';
+import Universe from './components/Universe';
 // import Grid from './components/Grid';
+
 
 class App extends Component {
     state = {  } 
     render() { 
         return <div id='appContainer'>
-            <Canvas id='canvas' camera={{ position: [0, 0, -30], fov: 25 }}>
+            <Canvas id='canvas' camera={{fov: 10, position:[0,0,-80] }}>
                 <OrbitControls 
                     minPolarAngle={Math.PI / 2} 
-                    maxPolarAngle={Math.PI / 1.65}
-                    minAzimuthAngle = {-Math.PI/12}
-                    maxAzimuthAngle = {Math.PI/12}
-                    minDistance = {5}
-                    maxDistance = {60}
-                    panSpeed = {0.1}
-                    rotateSpeed = {0.25}
-                    zoomSpeed = {0.5}
+                    maxPolarAngle={Math.PI / 1.2}
+                    minAzimuthAngle = {0}
+                    maxAzimuthAngle = {0}
+                    minDistance = {10}
+                    maxDistance = {100}
+                    panSpeed = {0.5}
+                    rotateSpeed = {0.5}
+                    zoomSpeed = {1}
                 />
-                <ambientLight intensity={0.5}/>
-                <pointLight position={[10, 10, 10]}/>
-                <group position={[-10,-5,0]}>
+                <ambientLight intensity={0.1}/>
+                <pointLight position={[0, 0, 1000]} lookAt={[0,0,0]}/>
+
+                <group position={[-14.25, -11, 0]}>
                     <Table/>
                 </group>
-                
-                <Stars/>
+
+                <Universe/>
+
                 <Stats/>
                 {/* <Grid size={10} /> */}
             </Canvas>
