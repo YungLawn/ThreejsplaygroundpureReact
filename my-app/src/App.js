@@ -3,6 +3,7 @@ import {Canvas} from '@react-three/fiber';
 import {OrbitControls, Stats} from '@react-three/drei';
 import './index.css';
 import Table from './components/table';
+import PeriodicTable from './components/PeriodicTable';
 import Universe from './components/Universe';
 // import Grid from './components/Grid';
 
@@ -27,7 +28,7 @@ class App extends Component {
                 <pointLight position={[0, 0, 1000]} lookAt={[0,0,0]}/>
 
                 <group position={[-14.25, -11, 0]}>
-                    <Table/>
+                    <PeriodicTable/>
                 </group>
 
                 <Universe/>

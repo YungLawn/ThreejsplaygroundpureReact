@@ -1,11 +1,13 @@
-import React, {Component} from "react";
-import {RoundedBox, Text} from '@react-three/drei'
+import React, {useRef, useState } from "react";
+import {RoundedBox, Text} from '@react-three/drei';
 
+export default function PeriodicTable(props) {
 
-class Table extends Component {
-    state = {  
-        textdepth: 0.135,
-        elements:[
+    const mesh = useRef(null);
+    const [hovered, setHover] = useState(false);
+    const [active, setActive] = useState(false);
+    const textdepth = 0.135;
+    const elements = [
             {num: 1, id: 'H', name: 'Hydrogen', mass:'1.00794', x:1, y:10, color:'#FF91C1'},
             {num: 2, id:'He', name:'Helium', mass:'4.002602',  x:18, y:10, color:'#FF91C1'},
         
@@ -134,40 +136,33 @@ class Table extends Component {
             {num: 116, id:'Lv', name:'Livermorium', mass:'(293)',  x:16, y:4, color:'#FFF036'},
             {num: 117, id:'Ts', name:'Tennessine', mass:'(294)', x:17, y:4, color:'#FFF036'},
             {num: 118, id:'Og', name:'Oganesson', mass:'(294)', x:18, y:4, color:'#FFF036'}
-        ]
-    };
-    
-    render() { 
-        return (
-            this.state.elements.map((element) => 
-                <group position={[element.x * 1.5, element.y * 1.5, 0]} key={element.id}>
-                    <mesh>
-                        <RoundedBox args={[1, 1, 0.25]} radius={0.1}>
-                            <meshLambertMaterial attach="material" color={element.color} />
-                        </RoundedBox>
-                    </mesh>
+        ];
 
-                    <Text 
-                        color={'black'} 
-                        scale={[4,4,4]}
-                        position={[0, 0, this.state.textdepth]}>
-                            {element.id}
-                    </Text>
-                    <Text 
-                        color={'black'} 
-                        scale={[1.5,1.5,1.5]}
-                        position={[0, -0.3, this.state.textdepth]}>
-                            {element.mass}
-                    </Text>
-                    <Text 
-                        color={'black'} 
-                        scale={[1.5,1.5,1.5]}
-                        position={[-0.275, 0.275, this.state.textdepth]}>
-                            {element.num}
-                    </Text>       
-                </group>)
-        );
-    }
+    return (
+
+        elements.map((element) =>
+        <group position={[element.x * 1.5, element.y * 1.5, 0]} key={element.id}>
+            <mesh
+                // {...props}
+                ref={mesh}
+                scale={hovered ? [1.5, 1.5, 1] : [1,1,1]}
+                onClick={(event) => setActive(!active)}
+                onPointerOver={(event) => setHover(true)}
+                onPointerOut={(event) => setHover(false)}>
+                <RoundedBox args={[1, 1, 0.25]} radius={0.1}>
+                    <meshLambertMaterial attach="material" color={element.color} />
+                </RoundedBox>
+            </mesh>
+
+            <Text
+                color={'black'} 
+                scale={[4,4,4]}
+                position={[0, 0, textdepth]}
+                
+            >
+                {element.id}
+            </Text>
+        </group>
+        )
+    )
 }
-
-export default Table;
