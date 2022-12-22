@@ -24,11 +24,12 @@ class App extends Component {
                     rotateSpeed = {0.5}
                     zoomSpeed = {1}
                 />
-                <ambientLight intensity={0.1}/>
-                <pointLight position={[0, 0, 1000]} lookAt={[0,0,0]}/>
+                <ambientLight intensity={0.5}/>
+                <pointLight position={[0, -100, -10]} lookAt={[0,0,0]} intensity={0.5}/>
+                <pointLight position={[0, 100, 10]} lookAt={[0,0,0]} intensity={0.5}/>
 
                 <group position={[-14.25, -11, 0]}>
-                    <PeriodicTable/>
+                    <PeriodicTable  />
                 </group>
 
                 <Universe/>

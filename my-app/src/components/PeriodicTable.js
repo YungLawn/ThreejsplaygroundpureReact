@@ -17,34 +17,35 @@ function Tile(element){
     return(
     <mesh 
     ref={Ref}
-    position={hover ? [0,0,0.25] : [0,0,0]}
-    onPointerOver={() => {setHover(true); element.hovered = true; }}
-    onPointerOut={() => {setHover(false); element.hovered = false; }}
+    position={hover || active ? [0,0,0.25] : [0,0,0]}
+    onPointerOver={() => {setHover(true)}}
+    onPointerOut={() => {setHover(false)}}
+    onClick={() => {setActive(!active)}}
     >
-        <RoundedBox position={[0, 0, textdepth]} args={[1, 1, 0.25]} radius={0.125} scale={hover ? [1.5,1.5,1] : 1}>
-            <meshLambertMaterial attach="material" color={element.color} />
+        <RoundedBox position={[0, 0, textdepth]} args={[1, 1, 0.25]} radius={0.125} scale={hover || active ? [1.5,1.5,1] : 1}>
+            <meshStandardMaterial attach="material" color={element.color}/>
         </RoundedBox>
 
         <Text 
             color={'black'} 
-            scale={hover ? 5 : 4}
+            scale={hover || active ? 6 : 4}
             position={abbrPos}
         >
-                {element.id}
+            {element.id}
         </Text>
         <Text 
             color={'black'} 
-            scale={hover ? 2.5 : 1.5}
-            position={hover ? massPosHovered : massPos}
+            scale={hover || active ? 2.5 : 1.5}
+            position={hover || active ? massPosHovered : massPos}
         >
-                {element.mass}
+            {element.mass}
         </Text>
         <Text 
             color={'black'} 
-            scale={hover ? 2.5 : 1.5}
-            position={hover ? numPosHovered : numPos}
+            scale={hover || active ? 2.5 : 1.5}
+            position={hover || active ? numPosHovered : numPos}
         >
-                {element.num}
+            {element.num}
         </Text>
     </mesh>)
 }
@@ -180,7 +181,6 @@ export default function PeriodicTable() {
             {num: 117, id:'Ts', name:'Tennessine', mass:'(294)', x:17, y:4, color:'#FFF036', hovered: false },
             {num: 118, id:'Og', name:'Oganesson', mass:'(294)', x:18, y:4, color:'#FFF036'}
         ];
-
     return (
         elements.map((element) =>
         <group position={[element.x * 1.5, element.y * 1.5, 0]} key={element.id}>
