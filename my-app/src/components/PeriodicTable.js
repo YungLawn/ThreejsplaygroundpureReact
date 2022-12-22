@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import {RoundedBox, Text, useCursor } from '@react-three/drei';
-
-function Tile(element){
+ import { RoundedBox, Text, useCursor } from '@react-three/drei';
+ 
+function ElementTile(element){
     const Ref = useRef();
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
@@ -12,7 +12,7 @@ function Tile(element){
     const massPos = [0,-0.3,0];
     const massPosHovered = [0,-0.3*1.5,0];
     const abbrPos = [0, 0, 0];
-    const textdepth = -0.135;
+    const textdepth = -0.14;
 
     return(
     <mesh 
@@ -22,8 +22,8 @@ function Tile(element){
     onPointerOut={() => {setHover(false)}}
     onClick={() => {setActive(!active)}}
     >
-        <RoundedBox position={[0, 0, textdepth]} args={[1, 1, 0.25]} radius={0.125} scale={hover || active ? [1.5,1.5,1] : 1}>
-            <meshStandardMaterial attach="material" color={element.color}/>
+        <RoundedBox smoothness={8} position={[0, 0, textdepth]} args={[1, 1, 0.25]} radius={0.09375} scale={hover || active ? [1.5,1.5,1] : 1}>
+            <meshStandardMaterial attach="material" color={element.color} />
         </RoundedBox>
 
         <Text 
@@ -184,7 +184,7 @@ export default function PeriodicTable() {
     return (
         elements.map((element) =>
         <group position={[element.x * 1.5, element.y * 1.5, 0]} key={element.id}>
-            {Tile(element)}
+            {ElementTile(element)}
         </group>
         )
     )
