@@ -9,12 +9,9 @@ function Tile(element){
 
     const numPos = [-0.3,0.3,0];
     const numPosHovered = [-0.3*1.5,0.3*1.5,0];
-
     const massPos = [0,-0.3,0];
     const massPosHovered = [0,-0.3*1.5,0];
-
     const abbrPos = [0, 0, 0];
-    
     const textdepth = -0.135;
 
     return(
