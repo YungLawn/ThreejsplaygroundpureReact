@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
- import { RoundedBox, Text, useCursor } from '@react-three/drei';
+import { RoundedBox, Text, useCursor } from '@react-three/drei';
  
 function ElementTile(element){
     const Ref = useRef();
@@ -23,7 +23,7 @@ function ElementTile(element){
     onClick={() => {setActive(!active)}}
     >
         <RoundedBox smoothness={8} position={[0, 0, textdepth]} args={[1, 1, 0.25]} radius={0.09375} scale={hover || active ? [1.5,1.5,1] : 1}>
-            <meshStandardMaterial attach="material" color={element.color} />
+            <meshStandardMaterial color={element.color} />
         </RoundedBox>
 
         <Text 

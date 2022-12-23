@@ -29,7 +29,7 @@ export default function PeriodicScene() {
 
         <Universe/>
 
-        <Stats/>
+        {/* <Stats/> */}
         {/* <Grid size={10} /> */}
     </Canvas>)
 }
