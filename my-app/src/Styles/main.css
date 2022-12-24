@@ -14,11 +14,16 @@
 	--textColor: #eee;
 }
 
+#sceneContainer {
+	background-color: #000000;
+	height: 97vh;
+}
+
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 40px;
+	height: 3vh;
 	padding: 0 2rem;
 	background-color: var(--mainColor);
 	color: var(--textColor);

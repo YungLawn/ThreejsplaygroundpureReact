@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+import './Styles/main.css'
 import PeriodicScene from './components/PeriodicScene';
 import Navbar from './components/Navbar';
 

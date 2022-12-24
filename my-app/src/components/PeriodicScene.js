@@ -1,7 +1,6 @@
 import React from 'react';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls, Stats} from '@react-three/drei';
-import '../index.css';
 import PeriodicTable from './PeriodicTable';
 import Universe from './Universe';
 // import Grid from './components/Grid';
