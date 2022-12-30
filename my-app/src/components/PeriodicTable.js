@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { RoundedBox, Text, useCursor } from '@react-three/drei';
+import '../Styles/main.css';
  
 function ElementTile(element){
     const Ref = useRef();
@@ -30,6 +31,7 @@ function ElementTile(element){
             color={'black'} 
             scale={hover || active ? 6 : 4}
             position={abbrPos}
+            font={""}
         >
             {element.id}
         </Text>
