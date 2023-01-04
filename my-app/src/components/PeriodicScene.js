@@ -14,37 +14,13 @@ function CursorControls(){
     useFrame(({mouse}) => {
         const x = (mouse.x * viewport.width) / 2;
         const y = (mouse.y * viewport.height) / 2;
-        cam.current.target.set(x, y, 0);
+        cam.current.location = [x, y, 0];
     })
-
-    console.log(cam.current.target);
+    // console.log(cam.current.location);
     return (
 
         <OrbitControls 
             ref = {cam} 
-            // minPolarAngle={Math.PI / 2}
-            // maxPolarAngle={Math.PI / 1.2}
-            // minAzimuthAngle = {0}
-            // maxAzimuthAngle = {0}
-            // minDistance = {10}
-            // maxDistance = {100}
-            // panSpeed = {0.5}
-            // rotateSpeed = {1}
-            // zoomSpeed = {1}
-        >
-        </OrbitControls>
-
-    )
-}
-
-
-
-export default function PeriodicScene() {
-    return(
-    <Canvas camera={{fov: 10, position:[0,0,-80] }}>
-
-        <OrbitControls 
-            // ref = {cam} 
             minPolarAngle={Math.PI / 2}
             maxPolarAngle={Math.PI / 1.2}
             minAzimuthAngle = {0}
@@ -54,10 +30,17 @@ export default function PeriodicScene() {
             panSpeed = {0.5}
             rotateSpeed = {1}
             zoomSpeed = {1}
+            location = {[0,0,0]}
         >
         </OrbitControls>
-        
-        {/* <CursorControls/> */}
+    )
+}
+
+export default function PeriodicScene() {
+    return(
+    <Canvas camera={{fov: 10, position:[0,0,-80] }}>
+
+        <CursorControls/>
     
         <ambientLight intensity={0.25}/>
         <pointLight position={[0, 40, 100]} lookAt={[0,0,0]} intensity={0.75}/>
@@ -68,7 +51,7 @@ export default function PeriodicScene() {
 
         <Universe/>
 
-        {/* <Stats/> */}
+        <Stats/>
         {/* <Grid size={10} /> */}
     </Canvas>)
 }

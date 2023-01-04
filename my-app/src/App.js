@@ -11,6 +11,7 @@ export default function App(){
             <div id='sceneContainer'>
                 <PeriodicScene/>
             </div>
+
         </React.Fragment>
     )
 };
