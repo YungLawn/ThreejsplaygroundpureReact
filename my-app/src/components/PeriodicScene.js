@@ -16,7 +16,7 @@ function CursorControls(){
         const y = (mouse.y * viewport.height) / 2;
         cam.current.location = [x, y, 0];
     })
-    // console.log(cam.current.location);
+    console.log(cam.location);
     return (
 
         <OrbitControls 
@@ -37,6 +37,8 @@ function CursorControls(){
 }
 
 export default function PeriodicScene() {
+    const Table = useRef();
+
     return(
     <Canvas camera={{fov: 10, position:[0,0,-80] }}>
 
@@ -45,7 +47,7 @@ export default function PeriodicScene() {
         <ambientLight intensity={0.25}/>
         <pointLight position={[0, 40, 100]} lookAt={[0,0,0]} intensity={0.75}/>
 
-        <group position={[-14.25, -11, 0]} rotation={[0,0,0]}>
+        <group ref={Table} position={[-14.25, -11, 0]} rotation={[0,0,0]}>
             <PeriodicTable  />
         </group>
 

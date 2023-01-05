@@ -7,10 +7,10 @@ class Universe extends Component {
     render() { 
         return (
             <group>
-                <Stars radius={100} depth={400} count={10000} factor={7} saturation={100} fade speed={1} />
-                <Stars radius={100} depth={300} count={10000} factor={7} saturation={100} fade speed={1} />
-                <Stars radius={100} depth={200} count={10000} factor={7} saturation={100} fade speed={1} />
-                <Stars radius={100} depth={100} count={10000} factor={7} saturation={100} fade speed={1} />
+                <Stars radius={100} depth={200} count={10000} factor={20} saturation={100} fade speed={1} />
+                <Stars radius={100} depth={150} count={10000} factor={20} saturation={100} fade speed={1} />
+                <Stars radius={100} depth={100} count={10000} factor={20} saturation={100} fade speed={1} />
+                <Stars radius={100} depth={50} count={10000} factor={20} saturation={100} fade speed={1} />
             </group>
             
             
