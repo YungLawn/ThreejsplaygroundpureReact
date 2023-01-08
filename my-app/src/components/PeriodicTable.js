@@ -41,46 +41,41 @@ const ElementText = (abbr, num, mass, hover, active) => {
     )
 }
 
-const Tile = (element, isIsotope, color) => {
-    const Tile = useRef();
+const ElementTile = (element) => {
+    const ElementTile = useRef();
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
     useCursor(hover);
-
-    const textdepth = -0.135;
-
-    const colorSelected = '#90EE90';
-
-    const abbr = isIsotope ? undefined : element.id;
-    const num = isIsotope ? undefined : element.num;
-    const mass = isIsotope ? undefined : element.mass;
+    const textdepth = -0.1375;
 
     return(
-    <mesh 
-    ref={Tile}
-    // position={hover || active ? [0,0,0.125] : [0,0,0]}
-    onPointerOver={() => {setHover(true)}}
-    onPointerOut={() => {setHover(false)}}
-    onClick={() => {setActive(!active)}}
-    >
-        <RoundedBox smoothness={8} position={[0, 0, textdepth]} args={[1, 1, 0.25]} radius={0.09375} scale={hover || active ? [1.5,1.5,1] : 1}>
-            <meshStandardMaterial color={hover || active ? colorSelected : color} />
-        </RoundedBox>
-
-        {ElementText(abbr, num, mass, hover, active)}
-        
-    </mesh>
+        <mesh
+        ref={ElementTile}
+        // position={hover || active ? [0,0,0.125] : [0,0,0]}
+        onPointerOver={() => {setHover(true)}}
+        onPointerOut={() => {setHover(false)}}
+        onClick={() => {setActive(!active)}}
+        >
+            {Tile('#ffffff', hover, active, [0, 0, textdepth])}
+            {ElementText(element.id, element.num, element.mass, hover, active)}
+            {IsotopeStack(element)}
+        </mesh>
     )
 }
 
-const IsotopeStack = (element) => {
-
+const Tile = (color, hover, active, position) => {
+    const colorSelected = '#90EE90';
     return(
-        element.isotopes.map((isotope, index) =>
-            <mesh position={[0,0,index]}>
-                {Tile(element, true, '#90EE90')}
-            </mesh>
-        )
+        <RoundedBox smoothness={10} position={position} args={[1, 1, 0.25]} radius={0.1} scale={hover || active ? [1.5,1.5,1] : 1}>
+            <meshStandardMaterial color={hover || active ? colorSelected : color} clearcoat={1}/>
+        </RoundedBox>
+    )
+}
+
+const IsotopeStack = (element, hover, active) => {
+    let isos = element.isotopes;
+    return(
+        Tile('#b41276', hover, active, [0,0,1])
     )
 }
 
@@ -222,9 +217,7 @@ export default function PeriodicTable() {
     return (
         elements.map((element) =>
         <group ref={Table} position={[element.x * 1.5, element.y * 1.5, 0]} key={element.id}>
-            {Tile(element, false, '#ffffff')}
-
-            {/* {IsotopeStack(element)} */}
+            {ElementTile(element)}
         </group>
         )
     )
