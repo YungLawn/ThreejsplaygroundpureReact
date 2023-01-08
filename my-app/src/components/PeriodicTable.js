@@ -75,7 +75,7 @@ const Tile = (color, hover, active, position) => {
 const IsotopeStack = (element, hover, active) => {
     let isos = element.isotopes;
     return(
-        Tile('#b41276', hover, active, [0,0,1])
+        Tile('#b41276', hover, active, [0,0,0.1])
     )
 }
 
