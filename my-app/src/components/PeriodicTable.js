@@ -56,26 +56,39 @@ const ElementTile = (element) => {
         onPointerOut={() => {setHover(false)}}
         onClick={() => {setActive(!active)}}
         >
-            {Tile('#ffffff', hover, active, [0, 0, textdepth])}
+            {Tile('#ffffff', hover, active, [0, 0, textdepth, ], [1.5,1.5,1])}
             {ElementText(element.id, element.num, element.mass, hover, active)}
-            {IsotopeStack(element)}
+            {/* {IsotopeStack()} */}
         </mesh>
     )
 }
 
-const Tile = (color, hover, active, position) => {
+const Tile = (color, hover, active, position, scaleFactor) => {
     const colorSelected = '#90EE90';
     return(
-        <RoundedBox smoothness={10} position={position} args={[1, 1, 0.25]} radius={0.1} scale={hover || active ? [1.5,1.5,1] : 1}>
-            <meshStandardMaterial color={hover || active ? colorSelected : color} clearcoat={1}/>
+        <RoundedBox smoothness={1} position={position} args={[1, 1, 0.25]} radius={0.0} scale={hover || active ? scaleFactor : 1}>
+            <meshStandardMaterial color={hover || active ? colorSelected : color}/>
         </RoundedBox>
     )
 }
 
-const IsotopeStack = (element, hover, active) => {
-    let isos = element.isotopes;
+const IsotopeStack = () => {
+    const ElementTile = useRef();
+    const [active, setActive] = useState(false);
+    const [hover, setHover] = useState(false);
+    useCursor(hover);
+    const textdepth = -0.1375;
+
     return(
-        Tile('#b41276', hover, active, [0,0,0.1])
+        <mesh
+        ref={ElementTile}
+        // position={hover || active ? [0,0,0.125] : [0,0,0]}
+        onPointerOver={() => {setHover(true)}}
+        onPointerOut={() => {setHover(false)}}
+        onClick={() => {setActive(!active)}}
+        >
+            {Tile('#ff84ef', hover, active, [0, 0, 0.2], [1,1,5])}
+        </mesh>
     )
 }
 
