@@ -58,7 +58,7 @@ const ElementTile = (element) => {
         >
             {Tile('#ffffff', hover, active, [0, 0, textdepth, ], [1.5,1.5,1])}
             {ElementText(element.id, element.num, element.mass, hover, active)}
-            {IsotopeStack(element)}
+            {/* {IsotopeStack(element)} */}
         </mesh>
     )
 }
