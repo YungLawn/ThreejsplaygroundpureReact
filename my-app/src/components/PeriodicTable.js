@@ -41,40 +41,107 @@ const ElementText = (abbr, num, mass, hover, active) => {
     )
 }
 
+// const TestElementText = (props) => {
+//     const numPos = [-0.25, -0.25, 0];
+//     const numPosHovered = [-0.25*1.5, -0.25*1.5, 0];
+
+//     const massPos = [0, 0.25, 0];
+//     const massPosHovered = [0, 0.25*1.5, 0];
+
+//     const abbrPos = [0.125, -0.0625, 0];
+//     const abbrPosHovered = [0.125*1.5, 0, 0];
+
+//     return(
+//         <mesh
+//         position={[0,0,0]}
+//     >
+//         <Text 
+//             color={'black'} 
+//             scale={hover || active ? 6 : 4}
+//             position={hover || active ? abbrPosHovered : abbrPos}
+//         >
+//             {abbr}
+//         </Text>
+//         <Text 
+//             color={'black'} 
+//             scale={hover || active ? 2.5 : 1.5}
+//             position={hover || active ? massPosHovered : massPos}
+//         >
+//             {mass}
+//         </Text>
+//         <Text 
+//             color={'black'} 
+//             scale={hover || active ? 2.5 : 1.5}
+//             position={hover || active ? numPosHovered : numPos}
+//         >
+//             {num}
+//         </Text>
+//     </mesh>
+//     )
+// }
+
 const ElementTile = (element) => {
     const ElementTile = useRef();
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
     useCursor(hover);
     const textdepth = -0.1375;
+    const colorSelected = '#ffffff';
 
     return(
-        <mesh
-        ref={ElementTile}
-        // position={hover || active ? [0,0,0.125] : [0,0,0]}
-        onPointerOver={() => {setHover(true)}}
-        onPointerOut={() => {setHover(false)}}
-        onClick={() => {setActive(!active)}}
-        >
-            {Tile('#ffffff', hover, active, [0, 0, textdepth, ], [1.5,1.5,1])}
-            {ElementText(element.id, element.num, element.mass, hover, active)}
-            {/* {IsotopeStack(element)} */}
+
+        <mesh> 
+            <mesh
+            ref={ElementTile}
+            // position={hover || active ? [0,0,0.125] : [0,0,0]}
+            onPointerOver={() => {setHover(true)}}
+            onPointerOut={() => {setHover(false)}}
+            onClick={() => {setActive(!active)}}
+            >
+                {Tile(colorSelected, '#ffffffff', hover, active, [0,0,textdepth,], [1.5,1.5,1], true)}
+                {ElementText(element.id, element.num, element.mass, hover, active)}
+            </mesh>
+
+            {IsotopeStack(element, active)}
         </mesh>
+        
+        
     )
 }
 
-const Tile = (color, hover, active, position, scaleFactor) => {
-    const colorSelected = '#90EE90';
+const Tile = (colorSelected, color, hover, active, position, scaleFactor, visible) => {
     return(
-        <RoundedBox smoothness={5} position={position} args={[1, 1, 0.25]} radius={0.0} scale={hover || active ? scaleFactor : 1}>
-            <meshStandardMaterial color={hover || active ? colorSelected : color}/>
+        <RoundedBox visible={visible} smoothness={5} position={position} args={[1, 1, 0.25]} radius={0.0} scale={hover || active ? scaleFactor : 1}>
+            <meshLambertMaterial color={hover || active ? colorSelected : color}/>
         </RoundedBox>
     )
 }
 
-const IsotopeStack = (element) => {
+// const TestTile = (props) => {
+//     const ElementTile = useRef();
+//     const [active, setActive] = useState(false);
+//     const [hover, setHover] = useState(false);
+//     useCursor(hover);
+
+//     return(
+//         <RoundedBox 
+//         position={props.position} 
+//         args={[1, 1, 0.25]} 
+//         radius={0.0} 
+//         scale={hover || active ? props.scaleFactor : 1}
+//         onPointerOver={() => {setHover(true)}}
+//         onPointerOut={() => {setHover(false)}}
+//         onClick={() => {setActive(!active)}}
+//         >
+//             <meshLambertMaterial color={hover || active ? props.colorSelected : props.color}/>
+//         </RoundedBox>
+//     )
+    
+// }
+
+const IsotopeStack = (element, visible) => {
     const isotopeMap = element.isotopes;
-    const ElementTile = useRef();
+    const Stack = useRef();
     const [active, setActive] = useState(false);
     const [hover, setHover] = useState(false);
     useCursor(hover);
@@ -84,13 +151,14 @@ const IsotopeStack = (element) => {
     return (
         isotopeMap.map((isotope, index) =>
             <mesh
+            position={hover || active ? [0,0,0] : 0}
             key={index}
-            ref={ElementTile}
+            ref={Stack}
             onPointerOver={() => {setHover(true)}}
             onPointerOut={() => {setHover(false)}}
             onClick={() => {setActive(!active)}}
             >
-                {Tile(isotope, hover, active, [0, 0, 0.2 + index/3.5], [1,1,1])}
+                {Tile(isotope, isotope, hover, active, [0, 0, 0.2 + index/3.5], [1,1,1], visible)}
             </mesh>
         )
     )
@@ -99,36 +167,36 @@ const IsotopeStack = (element) => {
 export default function PeriodicTable() {
     const R = '#ff0000';
     const G = '#00ff00';
-    const B = '#0000ff'
+    const B = '#0000ff';
     const elements = [
-        {num: 1, id:'H', name: 'Hydrogen', mass:'1.00794', x:1, y:10, isotopes: [G,G,R,B,B,B,B]},
-        {num: 2, id:'He', name:'Helium', mass:'4.002602', x:18, y:10, isotopes: []},
+        {num: 1, id:'H', name: 'Hydrogen', mass:'1.00794', x:1, y:10, isotopes: [G,G,B,R,R,R,R]},
+        {num: 2, id:'He', name:'Helium', mass:'4.002602', x:18, y:10, isotopes: [G,G,R,R,R,R,R,R]},
     
-        {num: 3, id:'Li', name:'Lithium', mass:'6.941', x:1, y:9, isotopes: []},
-        {num: 4, id:'Be', name:'Beryllium', mass:'9.012182',x:2, y:9, isotopes: []},
-        {num: 5, id:'B', name:'Boron', mass:'10.811', x:13, y:9, isotopes: []},
-        {num: 6, id:'C', name:'Carbon', mass:'12.0107', x:14, y:9, isotopes: []},
-        {num: 7, id:'N', name:'Nitrogen', mass:'14.0067', x:15, y:9, isotopes: []},
-        {num: 8, id:'O', name:'Oxygen', mass:'15.9994', x:16, y:9, isotopes: []},
-        {num: 9, id:'F', name:'Fluorine', mass:'18.9984032',x: 17, y:9, isotopes: []},
-        {num: 10, id:'Ne', name:'Neon', mass:'20.1797', x:18, y:9, isotopes: []},
+        {num: 3, id:'Li', name:'Lithium', mass:'6.941', x:1, y:9, isotopes: [R,R,G,G,R,R,R,R]},
+        {num: 4, id:'Be', name:'Beryllium', mass:'9.012182',x:2, y:9, isotopes: [R,B,R,G,B,B,R,R,R]},
+        {num: 5, id:'B', name:'Boron', mass:'10.811', x:13, y:9, isotopes: [R,R,R,G,G,R,R,R,R,R,R]},
+        {num: 6, id:'C', name:'Carbon', mass:'12.0107', x:14, y:9, isotopes: [R,R,B,B,G,G,B,B,R,R,R,R,R]},
+        {num: 7, id:'N', name:'Nitrogen', mass:'14.0067', x:15, y:9, isotopes: [R,R,R,B,G,G,B,B,R,R,R,R,R,R]},
+        {num: 8, id:'O', name:'Oxygen', mass:'15.9994', x:16, y:9, isotopes: [R,R,B,B,G,G,G,B,B,B,B,R,R]},
+        {num: 9, id:'F', name:'Fluorine', mass:'18.9984032',x: 17, y:9, isotopes: [R,R,B,B,G,B,B,B,B,R,R,R,R,R,R]},
+        {num: 10, id:'Ne', name:'Neon', mass:'20.1797', x:18, y:9, isotopes: [R,R,B,B,G,G,G,B,B,R,R,R,R,R,R,R,R,R,R]},
     
-        {num: 11, id:'Na', name:'Sodium', mass:'22.98976...', x:1, y:8, isotopes: []},
-        {num: 12, id:'Mg', name:'Magnesium', mass:'24.305', x:2, y:8, isotopes: []},
-        {num: 13, id:'Al', name:'Aluminium', mass:'26.9815386', x:13, y:8, isotopes: []},
-        {num: 14, id:'Si', name:'Silicon', mass:'28.0855', x:14, y:8, isotopes: []},
-        {num: 15, id:'P', name:'Phosphorus', mass:'30.973762', x:15, y:8, isotopes: []},
-        {num: 16, id:'S', name:'Sulfur', mass:'32.065', x:16, y:8, isotopes: []},
-        {num: 17, id:'Cl', name:'Chlorine', mass:'35.453', x:17, y:8, isotopes: []},
-        {num: 18, id:'Ar', name:'Argon', mass:'39.948', x:18, y:8, isotopes: []},
+        {num: 11, id:'Na', name:'Sodium', mass:'22.98976...', x:1, y:8, isotopes: [R,R,B,B,G,B,B,B,R,R,R,R,R,R,R,R,R,R,R]},
+        {num: 12, id:'Mg', name:'Magnesium', mass:'24.305', x:2, y:8, isotopes: [R,R,R,B,B,G,G,G,B,B,B,R,R,R,R,R,R,R,R,R,R]},
+        {num: 13, id:'Al', name:'Aluminium', mass:'26.9815386', x:13, y:8, isotopes: [R,R,B,B,B,G,B,B,B,R,R,R,R,R,R,R,R,R,R,R,R,R]},
+        {num: 14, id:'Si', name:'Silicon', mass:'28.0855', x:14, y:8, isotopes: [R,R,R,R,B,B,G,G,G,B,G,B,B,B,B,B,B,R,R,R,R,R,R,R,R,R,R]},
+        {num: 15, id:'P', name:'Phosphorus', mass:'30.973762', x:15, y:8, isotopes: [R,R,R,B,B,G,B,B,B,B,B,B,R,R,R,R,R,R,R,R,R]},
+        {num: 16, id:'S', name:'Sulfur', mass:'32.065', x:16, y:8, isotopes: [R,R,R,B,B,G,G,G,B,G,B,B,B,B,B,B,R,R,R,R,R,R]},
+        {num: 17, id:'Cl', name:'Chlorine', mass:'35.453', x:17, y:8, isotopes: [R,R,B,B,G,B,G,B,B,B,B,B,B,R,R,R,R,R,R,R]},
+        {num: 18, id:'Ar', name:'Argon', mass:'39.948', x:18, y:8, isotopes: [R,R,R,R,B,G,B,G,B,G,B,B,B,B,B,B,B,R,R,R,R]},
     
-        {num: 19, id:'K', name:'Potassium', mass:'39.948', x:1, y:7, isotopes: []},
-        {num: 20, id:'Ca', name:'Calcium', mass:'40.078', x:2, y:7, isotopes: []},
-        {num: 21, id:'Sc', name:'Scandium', mass:'44.955912', x:3, y:7, isotopes: []},
-        {num: 22, id:'Ti', name:'Titanium', mass:'47.867', x:4, y:7, isotopes: []},
-        {num: 23, id:'V', name:'Vanadium', mass:'50.9415', x:5, y:7, isotopes: []},
-        {num: 24, id:'Cr', name:'Chromium', mass:'51.9961', x:6, y:7, isotopes: []},
-        {num: 25, id:'Mn', name:'Manganese', mass:'54.938045', x:7, y:7, isotopes: []},
+        {num: 19, id:'K', name:'Potassium', mass:'39.948', x:1, y:7, isotopes: [R,R,B,B,G,B,G,B,B,B,B,B,B,B,B,R,R,R,R,R]},
+        {num: 20, id:'Ca', name:'Calcium', mass:'40.078', x:2, y:7, isotopes: [R,R,R,R,R,G,B,G,G,G,B,G,B,G,B,B,B,B,R,R,R,R]},
+        {num: 21, id:'Sc', name:'Scandium', mass:'44.955912', x:3, y:7, isotopes: [R,R,R,B,B,B,G,B,B,B,B,B,B,B,R,R,R,R,R,R]},
+        {num: 22, id:'Ti', name:'Titanium', mass:'47.867', x:4, y:7, isotopes: [R,R,R,R,R,B,B,G,G,G,G,G,B,B,B,B,R,R,R,R,R,R,R]},
+        {num: 23, id:'V', name:'Vanadium', mass:'50.9415', x:5, y:7, isotopes: [R,R,R,R,B,B,B,B,G,B,B,B,B,R,R,R,R,R,R,R,R,R]},
+        {num: 24, id:'Cr', name:'Chromium', mass:'51.9961', x:6, y:7, isotopes: [R,R,R,R,R,R,B,B,G,B,G,G,G,B,B,B,B,B,R,R,R,R,R,R,R,R]},
+        {num: 25, id:'Mn', name:'Manganese', mass:'54.938045', x:7, y:7, isotopes: [R,R,R,R,B,B,B,B,B,G,B,B,B,B,B,R,R,R,R,R,R,R,R,R]},
         {num: 26, id:'Fe', name:'Iron', mass:'55.845', x:8, y:7, isotopes: []},
         {num: 27, id:'Co', name:'Cobalt', mass:'58.933195', x:9, y:7, isotopes: []},
         {num: 28, id:'Ni', name:'Nickel', mass:'58.6934', x:10, y:7, isotopes: []},
