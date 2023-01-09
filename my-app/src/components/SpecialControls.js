@@ -11,7 +11,7 @@ export default function SpecialControls() {
             minAzimuthAngle = {0}
             maxAzimuthAngle = {0}
             minDistance = {10}
-            maxDistance = {10000}
+            maxDistance = {100}
             panSpeed = {0.5}
             rotateSpeed = {1}
             zoomSpeed = {1}

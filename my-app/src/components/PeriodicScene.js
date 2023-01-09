@@ -14,19 +14,23 @@ export default function PeriodicScene() {
     return(
     <Canvas camera={{fov: 10, position:[0,0,-80] }}>
 
-        <SpecialControls/>
+        <React.Suspense fallback={<></>}>
+            <SpecialControls/>
     
-        <ambientLight intensity={0.25}/>
-        <pointLight position={[0, 40, 100]} lookAt={[0,0,0]} intensity={0.75}/>
+            <ambientLight intensity={0.25}/>
+            <pointLight position={[0, 40, 100]} lookAt={[0,0,0]} intensity={0.75}/>
 
-        <group ref={Table} position={[-14.25, -10, 0]} rotation={[0,0,0]}>
-            <PeriodicTable  />
-        </group>
+            <group ref={Table} position={[-14.25, -10, 0]} rotation={[0,0,0]}>
+                <PeriodicTable  />
+            </group>
 
-        <Universe/>
+            <Universe/>
 
-        <Stats/>
-        {/* <Grid size={10} /> */}
+            <Stats/>
+            {/* <Grid size={10} /> */}
+        </React.Suspense>
+
+        
     </Canvas>)
 }
 
