@@ -98,7 +98,7 @@ const ElementTile = (element) => {
             onPointerOut={() => {setHover(false)}}
             onClick={() => {setActive(!active)}}
             >
-                {Tile(colorSelected, '#ffffffff', hover, active, [0,0,textdepth,], [1.5,1.5,1], true)}
+                {Tile(colorSelected, '#ffffff', hover, active, [0,0,textdepth,], [1.5,1.5,1], true)}
                 {ElementText(element.id, element.num, element.mass, hover, active)}
             </mesh>
 

@@ -18,7 +18,7 @@ export default function PeriodicScene() {
             <SpecialControls/>
     
             <ambientLight intensity={0.25}/>
-            <pointLight position={[0, 40, 100]} lookAt={[0,0,0]} intensity={0.75}/>
+            <pointLight position={[0, -20, 100]} lookAt={[0,0,0]} intensity={0.75}/>
 
             <group ref={Table} position={[-14.25, -10, 0]} rotation={[0,0,0]}>
                 <PeriodicTable  />
