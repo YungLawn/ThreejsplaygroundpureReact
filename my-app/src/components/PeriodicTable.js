@@ -111,7 +111,7 @@ const ElementTile = (element) => {
 
 const Tile = (colorSelected, color, hover, active, position, scaleFactor, visible) => {
     return(
-        <RoundedBox visible={visible} smoothness={5} position={position} args={[1, 1, 0.25]} radius={0.0} scale={hover || active ? scaleFactor : 1}>
+        <RoundedBox visible={visible} smoothness={1} position={position} args={[1, 1, 0.25]} radius={0.025} scale={hover || active ? scaleFactor : 1}>
             <meshLambertMaterial color={hover || active ? colorSelected : color}/>
         </RoundedBox>
     )

@@ -13,7 +13,7 @@ export default function SpecialControls() {
             minDistance = {10}
             maxDistance = {100}
             panSpeed = {0.5}
-            rotateSpeed = {1}
+            rotateSpeed = {0.25}
             zoomSpeed = {1}
             location = {[0,0,0]}
         >
