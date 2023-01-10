@@ -22,6 +22,7 @@
 .controls { 
 	position: absolute;
 	z-index: 2;
-	bottom: 5%;
-	left: 50%;
+	bottom: 2%;
+	left: 49%;
+	right: 49%;
 }
