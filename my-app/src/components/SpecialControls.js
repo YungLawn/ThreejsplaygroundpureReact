@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {OrbitControls, MapControls} from '@react-three/drei';
+import {OrbitControls} from '@react-three/drei';
 
 export default function SpecialControls() {
     return (

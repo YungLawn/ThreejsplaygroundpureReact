@@ -15,8 +15,7 @@ export default function App(){
             <div className='controls'>
                 <button onClick={clicked}> Click Me! </button>
             </div>
-
-
+            
             <div id='sceneContainer'>
                 <PeriodicScene/> 
             </div>

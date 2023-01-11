@@ -6,14 +6,11 @@ import Universe from './Universe';
 // import Grid from './components/Grid';
 import SpecialControls from './SpecialControls';
 
-
-
 export default function PeriodicScene() {
     const Table = useRef();
 
     return(
     <Canvas camera={{fov: 10, position:[0,0,-80] }}>
-
         <React.Suspense fallback={<></>}>
             <SpecialControls/>
     
@@ -29,8 +26,6 @@ export default function PeriodicScene() {
             <Stats/>
             {/* <Grid size={10} /> */}
         </React.Suspense>
-
-        
     </Canvas>)
 }
 
